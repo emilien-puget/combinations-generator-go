@@ -61,8 +61,8 @@ func Test_generator(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 
-			returnChan := makeChan(tt.args.characters, tt.args.length)
-			go generator(tt.args.characters, tt.args.length, tt.args.separator, &returnChan)
+			returnChan := MakeChan(tt.args.characters, tt.args.length)
+			go Generator(tt.args.characters, tt.args.length, tt.args.separator, &returnChan)
 
 			var results []string
 			for result := range returnChan {
