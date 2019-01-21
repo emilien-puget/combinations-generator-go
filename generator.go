@@ -11,15 +11,12 @@ func next(position uint, initial []string, first []string, last []string, charac
 	}
 
 	for _, char := range characters {
-		if initial[position] == char {
-			next(position-1, append([]string(nil), initial...), first, last, characters, separator, returnChan)
-			continue
+		if initial[position] != char {
+			initial[position] = char
+			*returnChan <- strings.Join(initial, separator)
 		}
-		initial[position] = char
-		*returnChan <- strings.Join(initial, separator)
 		next(position-1, append([]string(nil), initial...), first, last, characters, separator, returnChan)
 	}
-
 }
 
 func MakeChan(characters []string, length uint) chan string {
